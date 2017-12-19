@@ -5,7 +5,7 @@
   "main": "bot.js",
   "author": "MisterKhaos",
   "script": {
-	"start": "node bot.js"
+	"start": "node bot.js",
   }
   "dependencies": {
     "discord.io": "github:woor/discord.io#gateway_v6",
