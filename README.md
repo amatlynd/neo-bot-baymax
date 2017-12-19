@@ -19,9 +19,13 @@ To Run:
 1. Go to command line or command prompt
 2. Navigate to the folder where all the files are
 3. install dependencies using command line ie:
-    ```npm install winston node-fetch --save```
+```
+npm install winston node-fetch --save
+```
 4. Run bot.js
-    ```node bot.js```
+```
+node bot.js
+```
     
 To Use:
 1: exclamation mark (!) followed by the 3-4 letter cryptocurrency symbol ie:
