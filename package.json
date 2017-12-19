@@ -6,7 +6,7 @@
   "author": "MisterKhaos",
   "scripts": {
 	"start": "node bot.js"
-  }
+  },
   "dependencies": {
     "discord.io": "github:woor/discord.io#gateway_v6",
     "node-fetch": "^1.7.3",
