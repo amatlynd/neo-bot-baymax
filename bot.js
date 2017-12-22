@@ -31,6 +31,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		
 		const url = "https://api.coinmarketcap.com/v1/ticker";
 		
+		//place holder for all cryptocurrencies
+		if(cmd == "ALL"){
+			bot.sendMessage({
+				to: channelID,
+				message: "Nah"
+		}
+		
 		fetch(url)
 		.then((resp) => resp.json())
 		.then(function(data){
@@ -40,7 +47,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 					if(prompt == '!'){
 						finalMessage = "$" + data[i].price_usd
 					}if (prompt == '%'){
-						finalMessage = prompt + data[i].percent_change_24h
+						finalMessage =  data[i].percent_change_24h + prompt
 					}
 					bot.sendMessage({
 						to: channelID,
