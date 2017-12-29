@@ -29,7 +29,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		var finalMessage = ""
         args = args.splice(1);
 		
-		const url = "https://api.coinmarketcap.com/v1/ticker";
+		const url = "https://api.coinmarketcap.com/v1/ticker/limit=0";
 		
 		//place holder for all cryptocurrencies
 		if(cmd == "ALL"){
