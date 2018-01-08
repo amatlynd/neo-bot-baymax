@@ -42,12 +42,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		var r1 = 0;
 		var r2 = 0;
 		
-<<<<<<< HEAD
-=======
-		const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
->>>>>>> a29196525c8d7d907edb41f65e2f88e527d28523
-		
-		
 		//Gets all currencies
 		const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
 		
