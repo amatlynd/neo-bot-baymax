@@ -51,20 +51,20 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				ratio2 = cmd.slice(cmd.indexOf('/')+1);
 				bot.sendMessage({
 					to: channelID,
-					message: ratio1 + " " + ratio2
+					message:"Check: " + ratio1 + " " + ratio2
 				});
 				for (var j = 0;j < data.length;j++){
 					if(data[j].symbol == ratio1){
 						bot.sendMessage({
 							to: channelID,
-							message: data[j].price_usd
+							message: "ratio1 price: " + data[j].price_usd
 						});
 						r1 = parseFloat(data[j].price_usd);
 					}
 					if(data[j].symbol == ratio2){
 						bot.sendMessage({
 							to: channelID,
-							message: data[j].price_usd
+							message: "ratio2 price: " + data[j].price_usd
 						});
 						r2 = parseFloat(data[j].price_usd);
 					}
