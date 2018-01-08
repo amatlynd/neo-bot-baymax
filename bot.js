@@ -48,15 +48,19 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		fetch(url)
 		.then((resp) => resp.json())
 		.then(function(data){
+			bot.sendMessage({
+				to: channelID,
+				message: "entered the /"
+			});
 			if(cmd.indexOf('/') > -1){
 				ratio1 = cmd.slice(1,cmd.indexOf('/'));
 				ratio2 = cmd.slice(cmd.indexOf('/'),-1);
 				for (var j = 0;j < data.length;j++){
 					if(data[j].symbol == ratio1){
-						r1 = data[j].price_usd
+						r1 = data[j].price_usd;
 					}
 					if(data[j].symbol == ratio2){
-						r2 = data[j].price_usd
+						r2 = data[j].price_usd;
 					}
 					r1 = r1/r2;
 					finalMessage = r1;
