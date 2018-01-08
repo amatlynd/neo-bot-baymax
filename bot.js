@@ -47,8 +47,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 					to: channelID,
 					message: "entered the /"
 				});
-				ratio1 = cmd.slice(1,cmd.indexOf('/'));
-				ratio2 = cmd.slice(cmd.indexOf('/'),-1);
+				ratio1 = cmd.slice(0,cmd.indexOf('/'));
+				ratio2 = cmd.slice(cmd.indexOf('/')+1,-1);
 				bot.sendMessage({
 					to: channelID,
 					message: ratio1 + " " + ratio2
