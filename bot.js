@@ -48,11 +48,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		fetch(url)
 		.then((resp) => resp.json())
 		.then(function(data){
-			bot.sendMessage({
-				to: channelID,
-				message: "entered the /"
-			});
 			if(cmd.indexOf('/') > -1){
+				bot.sendMessage({
+					to: channelID,
+					message: "entered the /"
+				});
 				ratio1 = cmd.slice(1,cmd.indexOf('/'));
 				ratio2 = cmd.slice(cmd.indexOf('/'),-1);
 				for (var j = 0;j < data.length;j++){
