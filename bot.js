@@ -38,14 +38,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		var r3 = 0;
 		
 		if(cmd == "HELP"){
-			finalMessage = "Hello," + user + "\n"
+			finalMessage = "Hello, " + user + "\n"
 				+ "I am a crypto bot" + "\n"
 				+ "Currently I have the following commands: " + "\n"
-				+ "!<YOUR_TOKEN> and %<YOUR_TOKEN>" + "\n"
-				+ "% will give you the percent change for the last 24 hours" + "\n"
-				+ "! will give you the current price" + "\n"
-				+ "! also has a ratio function For example:"
-				+ "!neo/btc will give you the ratio for the two coins" + "\n"
+				+ "!<YOUR_TOKEN> and %<YOUR_TOKEN>" + "\n\n"
+				+ "%<YOUR_TOKEN> will give you the percent change for the last 24 hours" + "\n"
+				+ "!<YOUR_TOKEN> will give you the current price" + "\n"
+				+ "! also has a ratio function. \n For example: \n"
+				+ "!<YOUR_TOKEN1>/<YOUR_TOKEN2> will give you the ratio for the two coins" + "\n\n"
 				+ "I'm still growing so if you have any requests just tell Lyndon"
 
 			bot.sendMessage({
