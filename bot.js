@@ -35,6 +35,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		var ratio2 = "";
 		var r1 = 0;
 		var r2 = 0;
+		var r3 = 0;
 		
 		//Gets all currencies
 		const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
@@ -43,39 +44,23 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		.then((resp) => resp.json())
 		.then(function(data){
 			if(cmd.indexOf('/') > -1){
-				bot.sendMessage({
-					to: channelID,
-					message: "entered the /"
-				});
 				ratio1 = cmd.slice(0,cmd.indexOf('/'));
 				ratio2 = cmd.slice(cmd.indexOf('/')+1);
-				bot.sendMessage({
-					to: channelID,
-					message:"Check: " + ratio1 + " " + ratio2
-				});
 				for (var j = 0;j < data.length;j++){
 					if(data[j].symbol == ratio1){
-						bot.sendMessage({
-							to: channelID,
-							message: "ratio1 price: " + data[j].price_usd
-						});
 						r1 = parseFloat(data[j].price_usd);
 					}
 					if(data[j].symbol == ratio2){
-						bot.sendMessage({
-							to: channelID,
-							message: "ratio2 price: " + data[j].price_usd
-						});
 						r2 = parseFloat(data[j].price_usd);
 					}if(r1 && r2){
 						break;
 					}
 				}
-				r1 = r1/r2;
-				finalMessage = r1.toString();
+				r3 = r1/r2;
+				finalMessage = r3.toString();
 				bot.sendMessage({
 					to: channelID,
-					message: finalMessage
+					message: ratio1 + " " + ratio2 + " ratios is " + r1 + ":" + r2 + " = " + finalMessage
 				});
 			}
 			for(var i = 0;i < data.length;i++){
