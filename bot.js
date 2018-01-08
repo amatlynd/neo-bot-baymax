@@ -51,7 +51,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				ratio2 = cmd.slice(cmd.indexOf('/'),-1);
 				bot.sendMessage({
 					to: channelID,
-					message: ratio1 + " " + ratio
+					message: ratio1 + " " + ratio2
 				});
 				for (var j = 0;j < data.length;j++){
 					if(data[j].symbol == ratio1){
