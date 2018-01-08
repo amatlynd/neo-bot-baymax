@@ -3,12 +3,6 @@ var Discord = require('discord.io');
 var logger = require('winston');
 //var dbFunctions = require('./dbFunctions');
 
-
-
-
-
-
-
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -57,7 +51,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				ratio2 = cmd.slice(cmd.indexOf('/'),-1);
 				bot.sendMessage({
 					to: channelID,
-					message: ratio1 + " " + ratio2;
+					message: ratio1 + " " + ratio
 				});
 				for (var j = 0;j < data.length;j++){
 					if(data[j].symbol == ratio1){
