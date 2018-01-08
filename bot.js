@@ -37,12 +37,31 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		var r2 = 0;
 		var r3 = 0;
 		
+		if(cmd == "HELP"){
+			finalMessage = "Hello," + user + "\n"
+				+ "I am a crypto bot" + "\n"
+				+ "Currently I have the following commands: " + "\n"
+				+ "!<YOUR_TOKEN> and %<YOUR_TOKEN>" + "\n"
+				+ "% will give you the percent change for the last 24 hours" + "\n"
+				+ "! will give you the current price" + "\n"
+				+ "! also has a ratio function For example:"
+				+ "!neo/btc will give you the ratio for the two coins" + "\n"
+				+ "I'm still growing so if you have any requests just tell Lyndon"
+
+			bot.sendMessage({
+				to: channelID,	
+				message: finalMessage
+			});
+		}
+
+
 		//Gets all currencies
 		const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
 		
 		fetch(url)
 		.then((resp) => resp.json())
 		.then(function(data){
+			//This is for ratio
 			if(cmd.indexOf('/') > -1){
 				ratio1 = cmd.slice(0,cmd.indexOf('/'));
 				ratio2 = cmd.slice(cmd.indexOf('/')+1);
