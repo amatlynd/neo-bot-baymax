@@ -67,15 +67,16 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 							message: "ratio2 price: " + data[j].price_usd
 						});
 						r2 = parseFloat(data[j].price_usd);
+					}if(r1 && r2){
+						break;
 					}
-					r1 = r1/r2;
-					finalMessage = r1.toString();
-					bot.sendMessage({
-						to: channelID,
-						message: finalMessage
-					});
-					break;
 				}
+				r1 = r1/r2;
+				finalMessage = r1.toString();
+				bot.sendMessage({
+					to: channelID,
+					message: finalMessage
+				});
 			}
 			for(var i = 0;i < data.length;i++){
 				if(data[i].symbol == cmd){
