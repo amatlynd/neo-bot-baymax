@@ -60,7 +60,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				finalMessage = r3.toString();
 				bot.sendMessage({
 					to: channelID,
-					message: ratio1 + " " + ratio2 + " ratios is " + r1 + ":" + r2 + " = " + finalMessage
+					message: ratio1 + " " + ratio2 + " ratios is " + r1.toString() + ":" + r2.toString() + " = " + finalMessage
 				});
 			}
 			for(var i = 0;i < data.length;i++){
