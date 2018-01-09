@@ -1,7 +1,7 @@
 var fetch = require('node-fetch');
 var Discord = require('discord.io');
 var logger = require('winston');
-//var dbFunctions = require('./dbFunctions');
+var dbFunctions = require('./dbFunctions');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -62,6 +62,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		.then((resp) => resp.json())
 		.then(function(data){
 			//This is for ratio
+			//FIX for infinity cases
 			if(cmd.indexOf('/') > -1){
 				ratio1 = cmd.slice(0,cmd.indexOf('/'));
 				ratio2 = cmd.slice(cmd.indexOf('/')+1);
@@ -75,12 +76,16 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 						break;
 					}
 				}
-				r3 = r1/r2;
+				r3 = r2/r1;
 				finalMessage = r3.toString();
 				bot.sendMessage({
 					to: channelID,
 					message: ratio1 + " " + ratio2 + " ratios is " + r1.toString() + ":" + r2.toString() + " = " + finalMessage
 				});
+			}
+			//Testing database
+			if(prompt == '!' && cmd == "GETCOIN"){
+				dbFunctions.getPersonCoin(bot,"Test",channelID);
 			}
 			for(var i = 0;i < data.length;i++){
 				if(data[i].symbol == cmd){
