@@ -1,7 +1,7 @@
 var fetch = require('node-fetch');
 var Discord = require('discord.io');
 var logger = require('winston');
-var dbFunctions = require('./dbFunctions');
+//var dbFunctions = require('./dbFunctions');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -84,9 +84,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				});
 			}
 			//Testing database
-			if(prompt == '!' && cmd == "GETCOIN"){
-				dbFunctions.getPersonCoin(bot,"Test",channelID);
-			}
 			for(var i = 0;i < data.length;i++){
 				if(data[i].symbol == cmd){
 					//decides whether the price or percent change is wanted
