@@ -67,25 +67,29 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		.then(function(data){
 			var btcPrice;
 			var finalPrice;
+			var data1 = data;
+			
+			//looks for the btc usdt pairing to be used later
 			for(var j = 0; j < data.length;j++){
 				if(data[j].symbol == "BTCUSDT"){
 					btcPrice = data[j].price;
 				}
 			}
-		
+			
+			//non bitcoin case, will only talk if its in binance
 			if(cmd != "BTC"){
 				binanceCMD = cmd + "BTC";
-				for(var i = 0;i < data.length;i++){
-					if(data[i].symbol == binanceCMD){
+				for(var i = 0;i < data1.length;i++){
+					if(data1[i].symbol == binanceCMD){
 						if(prompt == '!'){
-								finalPrice = parseFloat(data[i].price) * parseFloat(btcPrice);
+								finalPrice = parseFloat(data1[i].price) * parseFloat(btcPrice);
 								finalMessage = "Binance Price: $" + finalPrice;
 						}
 
 						break;
 					}
 				}
-			}else{
+			}else{//bitcoin case
 				finalMessage = "Binance Price: $" + btcPrice;
 				bot.sendMessage({
 					to: channelID,
