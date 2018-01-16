@@ -73,7 +73,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				}
 			}
 		
-			if(cmd != "BTC "){
+			if(cmd != "BTC"){
 				binanceCMD = cmd + "BTC";
 				for(var i = 0;i < data.length;i++){
 					if(data[i].symbol == binanceCMD){
