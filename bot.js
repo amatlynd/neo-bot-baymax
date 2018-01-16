@@ -55,8 +55,40 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		}
 
 
-		//Gets all currencies
+		//Gets all currencies from coinmarketcap.com
 		const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
+		
+		//Gets all currencies from binance.com
+		const urlBinance = "https://api.binance.com/api/v1/ticker/allPrices";
+		var binanceCMD;
+		
+		fetch(urlBinance)
+		.then((resp => resp.json())
+		.then(function(data){
+
+			if(cmd != "BTC ")
+				binanceCMD = cmd + "BTC";
+			}
+			for(var i = 0;i < data.length;i++){
+				if(data[i].symbol == binanceCMD){
+					if(prompt == '!'){
+							finalMessage = "Binance Price: $" + data[i].price
+					}
+					bot.sendMessage({
+						to: channelID,
+						message: finalMessage
+					});
+					break;
+				}
+			}
+		}).catch(function(err){
+			bot.sendMessage({
+						to: channelID,
+						message: err
+					});
+			console.log('Fetch Error :-S', err);
+		});
+		
 		
 		fetch(url)
 		.then((resp) => resp.json())
@@ -83,7 +115,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 					message: ratio1 + " " + ratio2 + " ratios is " + r1.toString() + ":" + r2.toString() + " = " + finalMessage
 				});
 			}
-			//Testing database
+
 			for(var i = 0;i < data.length;i++){
 				if(data[i].symbol == cmd){
 					//decides whether the price or percent change is wanted
