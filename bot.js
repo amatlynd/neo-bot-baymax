@@ -65,22 +65,33 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		fetch(urlBinance)
 		.then((resp) => resp.json())
 		.then(function(data){
-
-			if(cmd != "BTC "){
-				binanceCMD = cmd + "BTC";
-			}
-			for(var i = 0;i < data.length;i++){
-				if(data[i].symbol == binanceCMD){
-					if(prompt == '!'){
-							finalMessage = "Binance Price: $" + data[i].price
-					}
-					bot.sendMessage({
-						to: channelID,
-						message: finalMessage
-					});
-					break;
+			var btcPrice;
+			var finalPrice;
+			for(var j = 0; j < data.length;j++){
+				if(data[i].symbol == "BTCUSDT"){
+					btcPrice = data[j].price;
 				}
 			}
+		
+			if(cmd != "BTC "){
+				binanceCMD = cmd + "BTC";
+				for(var i = 0;i < data.length;i++){
+					if(data[i].symbol == binanceCMD){
+						if(prompt == '!'){
+								finalPrice = parseFloat(data[i].price) * parseFloat(btcPrice);
+								finalMessage = "Binance Price: $" + finalPrice;
+						}
+						bot.sendMessage({
+							to: channelID,
+							message: finalMessage
+						});
+						break;
+					}
+				}
+			}else{
+
+			}
+
 		}).catch(function(err){
 			bot.sendMessage({
 						to: channelID,
@@ -120,7 +131,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				if(data[i].symbol == cmd){
 					//decides whether the price or percent change is wanted
 					if(prompt == '!'){
-							finalMessage = "$" + data[i].price_usd
+							finalMessage = "CoinMarketCap Price: $" + data[i].price_usd
 					}if (prompt == '%'){
 						finalMessage =  data[i].percent_change_24h + prompt
 					}
