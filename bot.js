@@ -68,7 +68,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 			var btcPrice;
 			var finalPrice;
 			for(var j = 0; j < data.length;j++){
-				if(data[i].symbol == "BTCUSDT"){
+				if(data[j].symbol == "BTCUSDT"){
 					btcPrice = data[j].price;
 				}
 			}
