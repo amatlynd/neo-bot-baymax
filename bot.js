@@ -81,15 +81,16 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 								finalPrice = parseFloat(data[i].price) * parseFloat(btcPrice);
 								finalMessage = "Binance Price: $" + finalPrice;
 						}
-						bot.sendMessage({
-							to: channelID,
-							message: finalMessage
-						});
+
 						break;
 					}
 				}
 			}else{
-
+				finalMessage = "Binance Price: $" + btcPrice;
+				bot.sendMessage({
+					to: channelID,
+					message: finalMessage
+				});
 			}
 
 		}).catch(function(err){
