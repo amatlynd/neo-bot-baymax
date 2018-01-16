@@ -63,10 +63,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		var binanceCMD;
 		
 		fetch(urlBinance)
-		.then((resp => resp.json())
+		.then((resp) => resp.json())
 		.then(function(data){
 
-			if(cmd != "BTC ")
+			if(cmd != "BTC "){
 				binanceCMD = cmd + "BTC";
 			}
 			for(var i = 0;i < data.length;i++){
