@@ -30,6 +30,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var args = message.substring(1).split(' ');
         var cmd = args[0].toUpperCase();
 		var finalMessage = "";
+		var finalMessage1 = "";
         args = args.splice(1);
 		var ratio1 = "";
 		var ratio2 = "";
@@ -54,12 +55,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 			});
 		}
 
-
+		//Gets all currencies from binance.com
+		const urlBinance = "https://api.binance.com/api/v1/ticker/allPrices";
+		
 		//Gets all currencies from coinmarketcap.com
 		const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
 		
-		//Gets all currencies from binance.com
-		const urlBinance = "https://api.binance.com/api/v1/ticker/allPrices";
+
 		var binanceCMD;
 		
 		fetch(urlBinance)
@@ -83,7 +85,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 					if(data[i].symbol == binanceCMD){
 						if(prompt == '!'){
 								finalPrice = parseFloat(data[i].price) * parseFloat(btcPrice);
-								finalMessage = "Binance Price: $" + finalPrice;
+								finalMessage1 = "Binance Price: $" + finalPrice;
 						}
 						break;
 					}
@@ -91,13 +93,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 				}
 				bot.sendMessage({
 					to: channelID,
-					message: finalMessage
+					message: finalMessage1
 				});
 			}else{//bitcoin case
 				finalMessage = "Binance Price: $" + btcPrice;
 				bot.sendMessage({
 					to: channelID,
-					message: finalMessage
+					message: finalMessage1
 				});
 			}
 
