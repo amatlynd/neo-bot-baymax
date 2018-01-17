@@ -28,6 +28,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     if (prompt == '!' ||prompt == '%') {
 		
         var args = message.substring(1).split(' ');
+		var binanceCMD;
         var cmd = args[0].toUpperCase();
 		var finalMessage = "";
 		var finalMessage1 = "";
@@ -39,15 +40,16 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		var r3 = 0;
 		
 		if(cmd == "HELP"){
-			finalMessage = "Hello, " + user + "\n"
+			finalMessage = "Hello, " + userID + "\n"
 				+ "I am a crypto bot" + "\n"
 				+ "Currently I have the following commands: " + "\n\n"
 				+ "!<YOUR_TOKEN> and %<YOUR_TOKEN>" + "\n\n"
 				+ "%<YOUR_TOKEN> will give you the percent change for the last 24 hours" + "\n\n"
-				+ "!<YOUR_TOKEN> will give you the current price" + "\n"
+				+ "!<YOUR_TOKEN> will give you the current price" + "\n\n"
+				+ "Currently it displays the prices of Binance and CoinMarketCap" + "\n\n"
 				+ "! also has a ratio function. \nFor example: \n"
-				+ "!<YOUR_TOKEN1>/<YOUR_TOKEN2> will give you the ratio for the two coins" + "\n\n"
-				+ "I'm still growing so if you have any requests just tell Lyndon"
+				+ "!<YOUR_TOKEN1>/<YOUR_TOKEN2> will give you the ratio for the two coins from CoinMarkerCap" + "\n\n"
+				+ "I'm still growing so if you have any requests or any other functionalities just tell Lyndon"
 
 			bot.sendMessage({
 				to: channelID,	
@@ -58,59 +60,61 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		//Gets all currencies from binance.com
 		const urlBinance = "https://api.binance.com/api/v1/ticker/allPrices";
 		
+
+		
+
+
 		//Gets all currencies from coinmarketcap.com
 		const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
 		
-
-		var binanceCMD;
-		
-		fetch(urlBinance)
-		.then((resp) => resp.json())
-		.then(function(data){
-			var btcPrice;
-			var finalPrice;
-			var data1 = data;
-			
-			//looks for the btc usdt pairing to be used later
-			for(var j = 0; j < data.length;j++){
-				if(data[j].symbol == "BTCUSDT"){
-					btcPrice = data[j].price;
-				}
-			}
-			
-			//non bitcoin case, will only talk if its in binance
-			if(cmd != "BTC"){
-				binanceCMD = cmd + "BTC";
-				for(var i = 0;i < data.length;i++){
-					if(data[i].symbol == binanceCMD){
-						if(prompt == '!'){
-								finalPrice = parseFloat(data[i].price) * parseFloat(btcPrice);
-								finalMessage1 = "Binance Price: $" + finalPrice;
-						}
-						break;
+		if (prompt == "!"){
+			fetch(urlBinance)
+			.then((resp) => resp.json())
+			.then(function(data){
+				var btcPrice;
+				var finalPrice;
+				var data1 = data;
+				
+				//looks for the btc usdt pairing to be used later
+				for(var j = 0; j < data.length;j++){
+					if(data[j].symbol == "BTCUSDT"){
+						btcPrice = data[j].price;
 					}
-					
 				}
-				bot.sendMessage({
-					to: channelID,
-					message: finalMessage1
-				});
-			}else{//bitcoin case
-				finalMessage1 = "Binance Price: $" + btcPrice;
-				bot.sendMessage({
-					to: channelID,
-					message: finalMessage1
-				});
-			}
-
-		}).catch(function(err){
-			bot.sendMessage({
+				
+				//non bitcoin case, will only talk if its in binance
+				if(cmd != "BTC"){
+					binanceCMD = cmd + "BTC";
+					for(var i = 0;i < data.length;i++){
+						if(data[i].symbol == binanceCMD){
+							if(prompt == '!'){
+									finalPrice = parseFloat(data[i].price) * parseFloat(btcPrice);
+									finalMessage1 = "Binance Price: $" + finalPrice;
+							}
+							break;
+						}
+						
+					}
+					bot.sendMessage({
 						to: channelID,
-						message: err
+						message: finalMessage1
 					});
-			console.log('Fetch Error :-S', err);
-		});
-		
+				}else{//bitcoin case
+					finalMessage1 = "Binance Price: $" + btcPrice;
+					bot.sendMessage({
+						to: channelID,
+						message: finalMessage1
+					});
+				}
+
+			}).catch(function(err){
+				bot.sendMessage({
+							to: channelID,
+							message: err
+						});
+				console.log('Fetch Error :-S', err);
+			});
+		}
 		
 		fetch(url)
 		.then((resp) => resp.json())
