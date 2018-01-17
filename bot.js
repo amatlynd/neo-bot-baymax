@@ -96,7 +96,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 					message: finalMessage1
 				});
 			}else{//bitcoin case
-				finalMessage = "Binance Price: $" + btcPrice;
+				finalMessage1 = "Binance Price: $" + btcPrice;
 				bot.sendMessage({
 					to: channelID,
 					message: finalMessage1
